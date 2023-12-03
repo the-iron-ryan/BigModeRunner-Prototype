@@ -49,7 +49,7 @@ public class GameModeController : Singleton<GameModeController>
     {
         // Increment the current game mode
         int nextGameMode = (int)CurrentGameMode + 1;
-        if(nextGameMode >= (int)GameMode.Puzzle)
+        if(nextGameMode > (int)GameMode.Puzzle)
         {
             nextGameMode = 0;
         }
