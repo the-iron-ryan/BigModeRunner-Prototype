@@ -19,12 +19,14 @@ public class RunnerPlayerController : MovingPlayerController
         curRunnerSpeed += runnerAcceleration * Time.deltaTime;
         curRunnerSpeed = Mathf.Clamp(curRunnerSpeed, 0.0f, maxRunnerSpeed);
         
-
+        // Calculate input movement
 		Vector3 horizontalInputDirection = new Vector3(playerInputState.move.x, 0.0f, 0.0f).normalized;
         Vector3 inputMovement = horizontalInputDirection * MoveSpeed * Time.deltaTime;
 
+        // Fetch jump/gravity movement calculated from JumpAndGravity function
+        Vector3 jumpMovement = new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime;
 
-        Vector3 combinedMovement = runnerMovement + inputMovement;
+        Vector3 combinedMovement = runnerMovement + inputMovement + jumpMovement;
         controller.Move(combinedMovement);
     }
 }

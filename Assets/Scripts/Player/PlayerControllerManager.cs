@@ -41,11 +41,11 @@ public class PlayerControllerManager : MonoBehaviour
         {
             if(pair.gameMode == gameMode)
             {
-                pair.playerController.gameObject.SetActive(true);
+                pair.playerController.enabled = true;
             }
             else
             {
-                pair.playerController.gameObject.SetActive(false);
+                pair.playerController.enabled = false;
             }
         }
     }

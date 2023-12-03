@@ -45,9 +45,9 @@ public abstract class MovingPlayerController : BasePlayerController
 	protected float jumpTimeoutDelta;
 	protected float fallTimeoutDelta;
 
-	protected override void Start()
+	protected override void Awake()
 	{
-		base.Start();
+		base.Awake();
 		
 		// reset our timeouts on start
 		jumpTimeoutDelta = JumpTimeout;
