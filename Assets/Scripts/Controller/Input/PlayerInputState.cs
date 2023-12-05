@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class PlayerInputState : MonoBehaviour
     public Vector2 look;
     public bool jump;
     public bool sprint;
+    public bool shoot;
+
 
     [Header("Movement Settings")]
     public bool analogMovement;

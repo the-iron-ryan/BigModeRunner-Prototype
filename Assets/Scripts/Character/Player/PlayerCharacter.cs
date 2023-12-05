@@ -1,20 +1,17 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class PlayerCharacter : BaseCharacter
 {
     public override CharacterTeam Team { get; set; } = CharacterTeam.Player;
 
-    
-    [Header("Player Settings")]
-    public float PlayerStartingHealth = 100f;
-    private float curPlayerHealth;
 
     public override void TakeDamage(float damage)
     {
-        curPlayerHealth -= damage;
+        curHealth -= damage;
 
-        if(curPlayerHealth <= 0)
+        if(curHealth <= 0)
         {
             Die();
         }

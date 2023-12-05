@@ -23,13 +23,15 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit)
+    void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Bullet Hit Collision");
+
         // Check if the object we hit is an enemy
-        if (hit.gameObject.GetComponent<IDamageable>() != null && hit.gameObject.GetComponent<BaseCharacter>().Team != team)
+        if (collision.gameObject.GetComponent<IDamageable>() != null && collision.gameObject.GetComponent<BaseCharacter>().Team != team)
         {
             // If it is, damage it
-            hit.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
+            collision.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
         }
 
         // Destroy the bullet
@@ -49,6 +51,7 @@ public class Bullet : MonoBehaviour
     public void SetDirection(Vector3 aimDirection)
     {
         this.aimDirection = aimDirection;
+        transform.LookAt(transform.position + aimDirection);
     }
 
     public void SetSpeed(float bulletSpeed)

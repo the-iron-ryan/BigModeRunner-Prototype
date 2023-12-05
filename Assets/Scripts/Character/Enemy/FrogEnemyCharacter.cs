@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrogEnemy : BaseEnemy
+public class FrogEnemy : BaseEnemyCharacter
 {
 
 }

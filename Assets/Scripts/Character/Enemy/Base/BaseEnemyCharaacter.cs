@@ -6,7 +6,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(MeshRenderer))]
-public abstract class BaseEnemy : BaseCharacter, IDamageable
+public abstract class BaseEnemyCharacter : BaseCharacter, IDamageable
 {
     /// <summary>
     /// Basic enum to represent the enemy's color
@@ -22,8 +22,6 @@ public abstract class BaseEnemy : BaseCharacter, IDamageable
     public override CharacterTeam Team {get; set;} = CharacterTeam.Enemy;
 
     [Header("Enemy Settings")]
-    public float EnemyStartingHealth = 100f;
-    private float curEnemyHealth;
     public EnemyColor EnemyColorType;
 
     protected BoxCollider boxCollider;
@@ -36,6 +34,8 @@ public abstract class BaseEnemy : BaseCharacter, IDamageable
 
     protected override void Awake()
     {
+        base.Awake();
+
         boxCollider = GetComponent<BoxCollider>();
         meshRenderer = GetComponent<MeshRenderer>();
         boxColliderDefaultSize = boxCollider.size;
@@ -102,9 +102,9 @@ public abstract class BaseEnemy : BaseCharacter, IDamageable
 
     public override void TakeDamage(float damage)
     {
-        curEnemyHealth -= damage;
+        curHealth -= damage;
 
-        if(curEnemyHealth <= 0)
+        if(curHealth <= 0)
         {
             Die();
         }

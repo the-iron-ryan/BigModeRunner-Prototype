@@ -6,7 +6,6 @@ public enum CharacterTeam
     Enemy
 }
 
-[RequireComponent(typeof(CharacterController))]
 public abstract class BaseCharacter : MonoBehaviour, IDamageable
 {
     /// <summary>
@@ -15,12 +14,13 @@ public abstract class BaseCharacter : MonoBehaviour, IDamageable
     /// <value></value>
     public abstract CharacterTeam Team {get; set;}
 
-	protected CharacterController controller;
+    [Header("Health Settings")]
+    public float StartingHealth = 100f;
+    protected float curHealth;
 
     protected virtual void Awake()
     {
-        controller = GetComponent<CharacterController>();
+        curHealth = StartingHealth;
     }
-
-    public abstract void TakeDamage(float damage);
+   public abstract void TakeDamage(float damage);
 }

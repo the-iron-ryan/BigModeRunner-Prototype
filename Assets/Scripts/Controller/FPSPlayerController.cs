@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
@@ -14,6 +15,9 @@ public class FPSPlayerController : MovingPlayerController
 	[Tooltip("How far in degrees can you move the camera down")]
 	public float BottomClamp = -90.0f;
 
+	[Header("Player Gun")]
+	public PlayerGun Gun;
+
 
 	// player
 	private float speed;
@@ -22,7 +26,31 @@ public class FPSPlayerController : MovingPlayerController
 	private const float rotationInputThreshold = 0.01f;
 
 
-	private void LateUpdate()
+    protected override void Awake()
+    {
+        base.Awake();
+
+		if(Gun == null)
+		{
+			Gun = GetComponentInChildren<PlayerGun>();
+		}
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+		Gun.gameObject.SetActive(true);
+    }
+	
+	protected override void OnDisable()
+	{
+		base.OnDisable();
+
+		Gun.gameObject.SetActive(false);
+	}
+
+    private void LateUpdate()
 	{
 		CameraRotation();
 	}
@@ -47,6 +75,9 @@ public class FPSPlayerController : MovingPlayerController
 			// rotate the player left and right
 			transform.Rotate(Vector3.up * rotationVelocity);
 		}
+
+		// Lastly, update the gun direction	
+		Gun.AimDirection = transform.forward;
 	}
 
 	override protected void Move()
@@ -94,6 +125,24 @@ public class FPSPlayerController : MovingPlayerController
 
 		// move the player
 		controller.Move(inputDirection.normalized * (speed * Time.deltaTime) + new Vector3(0.0f, verticalVelocity, 0.0f) * Time.deltaTime);
+	}
+
+	/// <summary>
+	/// Bang bang
+	/// </summary>
+	/// <param name="value"></param>
+	public void OnShoot(InputValue value)
+	{
+		// Don't shoot if this controller is not enabled
+		if(!enabled)
+		{
+			return;
+		}
+
+		if(value.isPressed)
+		{
+			Gun.Shoot();
+		}
 	}
 
 	private static float ClampAngle(float lfAngle, float lfMin, float lfMax)

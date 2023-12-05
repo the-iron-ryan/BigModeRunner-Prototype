@@ -8,39 +8,51 @@ public abstract class BaseGun : MonoBehaviour
     public float FireRate = 0.5f;
     public float BulletSpeed = 10f;
     public float Damage = 10f;
+    public bool CanShoot = true;
 
+    protected float fireTimer = 0f;
+    
     /// <summary>
     /// The direction the gun is aiming. 
     /// This should be set in the base class to determine the direction the gun firing
     /// </summary>
-    protected Vector3 aimDirection;
+    public Vector3 AimDirection {get; set;}
 
     [Header("Gun References")]
-    public GameObject BulletPrefab;
+    public Bullet BulletPrefab;
+    public Transform BulletSpawnPoint;
     public BaseCharacter Owner;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if(Owner == null)
+        {
+            Owner = GetComponentInParent<BaseCharacter>();
+        }
+    }
+    
+    void Update()
+    {
+        // Subtract the fire timer by dt. Clamp it to 0 so it doesn't go negative
+        fireTimer = Mathf.Clamp(fireTimer - Time.deltaTime, 0f, FireRate);
     }
 
-
-    protected virtual void Shoot()
+    public virtual void Shoot()
     {
-        // Create a bullet
-        GameObject bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+        Debug.Log("Base Gun Shoot");
+        if(CanShoot && fireTimer <= 0f)
+        {
+            fireTimer = FireRate;
 
-        // Be sure bullet is on same team
-        bullet.GetComponent<Bullet>().SetTeam(Owner.Team);
+            // Create a bullet
+            Bullet bullet = Instantiate(BulletPrefab, BulletSpawnPoint.position, Quaternion.identity);
 
-        // Set the bullet's direction
-        bullet.GetComponent<Bullet>().SetDirection(aimDirection);
+            // Be sure bullet is on same team
+            bullet.SetTeam(Owner.Team);
 
-        // Set the bullet's speed
-        bullet.GetComponent<Bullet>().SetSpeed(BulletSpeed);
-
-        // Set the bullet's damage
-        bullet.GetComponent<Bullet>().SetDamage(Damage);
+            bullet.SetDirection(AimDirection);
+            bullet.SetSpeed(BulletSpeed);
+            bullet.SetDamage(Damage);
+        }
     }
 }
