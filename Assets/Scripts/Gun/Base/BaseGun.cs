@@ -23,7 +23,7 @@ public abstract class BaseGun : MonoBehaviour
     public Transform BulletSpawnPoint;
     public BaseCharacter Owner;
 
-    void Awake()
+    protected virtual void Awake()
     {
         if(Owner == null)
         {
@@ -31,7 +31,7 @@ public abstract class BaseGun : MonoBehaviour
         }
     }
     
-    void Update()
+    protected virtual void Update()
     {
         // Subtract the fire timer by dt. Clamp it to 0 so it doesn't go negative
         fireTimer = Mathf.Clamp(fireTimer - Time.deltaTime, 0f, FireRate);

@@ -63,7 +63,7 @@ public class GameModeController : Singleton<GameModeController>
         int nextGameMode = (int)CurrentGameMode - 1;
         if(nextGameMode < 0)
         {
-            nextGameMode = (int)GameMode.Puzzle - 1;
+            nextGameMode = (int)GameMode.Puzzle;
         }
 
         SetGameMode((GameMode)nextGameMode);

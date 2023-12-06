@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6014211446013865785, guid: a8e854af8a51f1c599ed8da1f7c2a3f9, type: 3}
       propertyPath: m_Name
-      value: BaseGunModel
+      value: EnemyGun
       objectReference: {fileID: 0}
     - target: {fileID: 6358262294577608067, guid: a8e854af8a51f1c599ed8da1f7c2a3f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -55,5 +55,37 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6014211446013865785, guid: a8e854af8a51f1c599ed8da1f7c2a3f9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8218465867406742118}
   m_SourcePrefab: {fileID: 100100000, guid: a8e854af8a51f1c599ed8da1f7c2a3f9, type: 3}
+--- !u!4 &6581111180616442151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6919421929352404794, guid: a8e854af8a51f1c599ed8da1f7c2a3f9, type: 3}
+  m_PrefabInstance: {fileID: 4274606907532492317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7504317663093002532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6014211446013865785, guid: a8e854af8a51f1c599ed8da1f7c2a3f9, type: 3}
+  m_PrefabInstance: {fileID: 4274606907532492317}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8218465867406742118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7504317663093002532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5010caf9e97ef863db49dc41d02a109c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FireRate: 0.5
+  BulletSpeed: 10
+  Damage: 10
+  CanShoot: 1
+  BulletPrefab: {fileID: 678109138409574053, guid: 2821f2d60a8fd3b02bebb84f87b448aa, type: 3}
+  BulletSpawnPoint: {fileID: 6581111180616442151}
+  Owner: {fileID: 0}

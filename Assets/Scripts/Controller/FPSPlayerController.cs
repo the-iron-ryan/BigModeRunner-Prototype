@@ -15,8 +15,6 @@ public class FPSPlayerController : MovingPlayerController
 	[Tooltip("How far in degrees can you move the camera down")]
 	public float BottomClamp = -90.0f;
 
-	[Header("Player Gun")]
-	public PlayerGun Gun;
 
 
 	// player
@@ -30,24 +28,20 @@ public class FPSPlayerController : MovingPlayerController
     {
         base.Awake();
 
-		if(Gun == null)
-		{
-			Gun = GetComponentInChildren<PlayerGun>();
-		}
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
-		Gun.gameObject.SetActive(true);
+		playerCharacter.Gun.gameObject.SetActive(true);
     }
 	
 	protected override void OnDisable()
 	{
 		base.OnDisable();
 
-		Gun.gameObject.SetActive(false);
+		playerCharacter.Gun.gameObject.SetActive(false);
 	}
 
     private void LateUpdate()
@@ -77,7 +71,8 @@ public class FPSPlayerController : MovingPlayerController
 		}
 
 		// Lastly, update the gun direction	
-		Gun.AimDirection = transform.forward;
+		// TODO: Make this follow the camera's direction
+		playerCharacter.Gun.AimDirection = transform.forward;
 	}
 
 	override protected void Move()
@@ -141,7 +136,7 @@ public class FPSPlayerController : MovingPlayerController
 
 		if(value.isPressed)
 		{
-			Gun.Shoot();
+			playerCharacter.Gun.Shoot();
 		}
 	}
 

@@ -22,6 +22,7 @@ public abstract class BasePlayerController : MonoBehaviour
 	protected Quaternion cameraStartingRotation;
 
 
+	protected PlayerCharacter playerCharacter;
 	protected PlayerInput playerInput;
 	protected PlayerInputState playerInputState;
 	protected CharacterController controller;
@@ -37,6 +38,7 @@ public abstract class BasePlayerController : MonoBehaviour
 	protected virtual void Awake()
 	{
 		// Assign components 
+		playerCharacter = GetComponent<PlayerCharacter>();
 		controller = GetComponent<CharacterController>();
 		playerInputState = GetComponent<PlayerInputState>();
 		playerInput = GetComponent<PlayerInput>();
