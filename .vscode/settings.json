@@ -51,6 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BigModeRunner.sln",
+    "dotnet.defaultSolution": "BigModeRunner-Prototype.sln",
     "git-blame.gitWebUrl": ""
 }
